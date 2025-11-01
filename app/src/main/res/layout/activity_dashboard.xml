@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:text="Welcome to ServeSphere!"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnBookService"
+            android:text="Book a Service" />
+
+        <Button
+            android:id="@+id/btnViewBookings"
+            android:text="View My Bookings"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

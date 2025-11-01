@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689147356441",
+    "project_id": "servesphere-64224",
+    "storage_bucket": "servesphere-64224.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689147356441:android:7e75c5fdd59f70942c9188",
+        "android_client_info": {
+          "package_name": "com.example.servesphere"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtZhyTZJWBriKiocIbNErvCX3aGS0ciJA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
