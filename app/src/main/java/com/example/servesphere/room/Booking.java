@@ -3,6 +3,10 @@ package com.example.servesphere.room;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Booking entity class
+ * Represents a service booking stored locally and synced with Firebase.
+ */
 @Entity(tableName = "bookings")
 public class Booking {
 
@@ -12,11 +16,13 @@ public class Booking {
     private String serviceType;
     private String date;
     private String location;
-    private String imageUrl; // ✅ New field for Firebase image
+    private String notes;
+    private String imageUrl;
 
-    public Booking() {
-    }
+    // Empty constructor (required by Firebase)
+    public Booking() {}
 
+    // Constructor for Room
     public Booking(String serviceType, String date, String location) {
         this.serviceType = serviceType;
         this.date = date;
@@ -35,6 +41,9 @@ public class Booking {
 
     public String getLocation() { return location; }
     public void setLocation(String location) { this.location = location; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }

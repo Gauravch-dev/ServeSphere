@@ -1,50 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@android:color/white">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <EditText
-            android:id="@+id/editServiceType"
+            android:id="@+id/etServiceType"
+            android:hint="Service Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Service Type" />
+            android:inputType="textCapWords"
+            android:padding="10dp" />
+
+        <!-- DATE PICKER -->
+        <Button
+            android:id="@+id/btnPickDate"
+            android:text="📅 Choose Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvSelectedDate"
+            android:text="No date selected"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#555555" />
+
+        <!-- TIME PICKER -->
+        <Button
+            android:id="@+id/btnPickTime"
+            android:text="⏰ Choose Time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvSelectedTime"
+            android:text="No time selected"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#555555" />
 
         <EditText
-            android:id="@+id/editDate"
+            android:id="@+id/etLocation"
+            android:hint="Location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date (e.g. 2025-10-28)" />
-
-        <EditText
-            android:id="@+id/editLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Location" />
-
-        <ImageView
-            android:id="@+id/bookingImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:contentDescription="Booking Image" />
+            android:layout_marginTop="16dp"
+            android:inputType="textCapWords"
+            android:padding="10dp" />
 
         <Button
-            android:id="@+id/btnCapture"
+            android:id="@+id/btnSaveBooking"
+            android:text="Save Booking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Capture Image" />
-
-        <Button
-            android:id="@+id/buttonSaveBooking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Booking" />
-
+            android:layout_marginTop="24dp" />
     </LinearLayout>
 </ScrollView>

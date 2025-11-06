@@ -1,0 +1,40 @@
+{
+  "AddBooking": [
+    "book service",
+    "add booking",
+    "schedule appointment",
+    "reserve",
+    "cleaning booking"
+  ],
+  "ViewBookings": [
+    "my bookings",
+    "show bookings",
+    "view appointments",
+    "list bookings"
+  ],
+  "ListServices": [
+    "what services",
+    "available services",
+    "service list",
+    "offer"
+  ],
+  "FindNearby": [
+    "near me",
+    "nearby service",
+    "find electrician",
+    "find plumber",
+    "closest"
+  ],
+  "Greet": [
+    "hello",
+    "hi",
+    "good morning",
+    "hey"
+  ],
+  "Goodbye": [
+    "bye",
+    "good night",
+    "see you",
+    "thanks"
+  ]
+}

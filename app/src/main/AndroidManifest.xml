@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.servesphere">
-
-    <!-- 🌐 Required permissions for Internet, Firebase, and Room -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-
+    <!-- 🌐 Core Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -22,33 +21,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ServeSphere">
-
-        <!-- 🚀 Launch screen: LoginActivity -->
+        <activity
+            android:name=".FindServiceActivity"
+            android:exported="false" />
+        <!-- 🚀 Launcher Activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Registration screen -->
+        <receiver
+            android:name=".BookingAlertReceiver"
+            android:exported="false" /> <!-- Registration -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
-
-        <!-- Main Dashboard screen -->
+            android:exported="false" /> <!-- Main Dashboard -->
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-
-        <!-- Room / Firebase / Map / Chat components (used later in CO3–CO4) -->
+            android:exported="true" /> <!-- Chatbot -->
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:label="ServeSphere Chatbot"
+            android:theme="@style/Theme.ServeSphere" /> <!-- Booking Management -->
+        <activity android:name=".AddBookingActivity" />
+        <activity android:name=".ViewBookingsActivity" /> <!-- Google Maps -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-        <activity android:name=".AddBookingActivity" />
-        <activity android:name=".ViewBookingsActivity" />
-
+            android:value="AIzaSyBm2Z6Ocjf0mw1lvnNVDRrh8DMzhtsrYqw" />
     </application>
+
 </manifest>

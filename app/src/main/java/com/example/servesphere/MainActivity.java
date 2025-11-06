@@ -10,30 +10,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView welcomeText;
-    Button buttonAddBooking, buttonViewBookings;
+    private TextView welcomeText;
+    private Button buttonAddBooking;
+    private Button buttonViewBookings;
+    private Button buttonChatbot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BookingAlertScheduler.checkAndNotifyUpcoming(this);
 
+        // 🔗 Bind views
         welcomeText = findViewById(R.id.welcomeText);
         buttonAddBooking = findViewById(R.id.buttonAddBooking);
         buttonViewBookings = findViewById(R.id.buttonViewBookings);
+        buttonChatbot = findViewById(R.id.buttonChatbot);
+        Button btnOpenMap = findViewById(R.id.btnOpenMap);
 
-        buttonAddBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddBookingActivity.class));
-            }
+        btnOpenMap.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FindServiceActivity.class);
+            startActivity(intent);
         });
 
-        buttonViewBookings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ViewBookingsActivity.class));
-            }
-        });
+        // ➕ Add Booking
+        buttonAddBooking.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, AddBookingActivity.class))
+        );
+
+        // 📋 View Bookings
+        buttonViewBookings.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ViewBookingsActivity.class))
+        );
+
+        // 💬 Chatbot Assistant
+        buttonChatbot.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ChatActivity.class))
+        );
     }
 }
+//first=AIzaSyBm2Z6Ocjf0mw1lvnNVDRrh8DMzhtsrYqw

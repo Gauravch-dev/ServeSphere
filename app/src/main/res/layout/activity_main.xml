@@ -4,29 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:gravity="center"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:padding="24dp">
 
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to ServeSphere!"
-        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:textSize="24sp"
+        android:layout_marginBottom="32dp"
+        android:textColor="#212121"/>
 
     <Button
         android:id="@+id/buttonAddBooking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Booking"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#1976D2"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/buttonViewBookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View My Bookings"/>
+        android:text="View My Bookings"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#388E3C"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/buttonChatbot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open Chatbot Assistant"
+        android:backgroundTint="#F57C00"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/btnOpenMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find Nearby Services"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="@android:color/white" />
 </LinearLayout>
