@@ -20,12 +20,15 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class AddBookingActivity extends AppCompatActivity {
 
@@ -39,8 +42,9 @@ public class AddBookingActivity extends AppCompatActivity {
     private double selectedLng = 0.0;
 
     private final Calendar bookingCalendar = Calendar.getInstance();
-
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1001;
+
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +61,19 @@ public class AddBookingActivity extends AppCompatActivity {
 
         // Initialize Google Places SDK
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyBm2Z6Ocjf0mw1lvnNVDRrh8DMzhtsrYqw");
+            Places.initialize(getApplicationContext(), "AIzaSyAeC_3LSnTXWEJgQ-NAClE-rgkb6cz_D-0");
         }
 
-        // Disable manual typing for location field
+        // Initialize Firebase
+        firestore = FirebaseFirestore.getInstance();
+
         etLocation.setFocusable(false);
         etLocation.setOnClickListener(v -> openPlaceAutocomplete());
-
         btnPickDate.setOnClickListener(v -> openDatePicker());
         btnPickTime.setOnClickListener(v -> openTimePicker());
         btnSaveBooking.setOnClickListener(v -> saveBooking());
     }
 
-    /** 📅 Opens a date picker dialog */
     private void openDatePicker() {
         int year = bookingCalendar.get(Calendar.YEAR);
         int month = bookingCalendar.get(Calendar.MONTH);
@@ -88,7 +92,6 @@ public class AddBookingActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /** ⏰ Opens a time picker dialog */
     private void openTimePicker() {
         int hour = bookingCalendar.get(Calendar.HOUR_OF_DAY);
         int minute = bookingCalendar.get(Calendar.MINUTE);
@@ -108,7 +111,6 @@ public class AddBookingActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /** 📍 Opens Google Places Autocomplete for selecting a location */
     private void openPlaceAutocomplete() {
         List<Place.Field> fields = Arrays.asList(
                 Place.Field.ID,
@@ -124,7 +126,7 @@ public class AddBookingActivity extends AppCompatActivity {
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
     }
 
-    /** 📦 Save booking locally and schedule alert */
+    /** Save booking locally and also upload to Firebase */
     private void saveBooking() {
         String serviceType = etServiceType.getText().toString().trim();
         String location = etLocation.getText().toString().trim();
@@ -136,13 +138,27 @@ public class AddBookingActivity extends AppCompatActivity {
 
         String fullDateTime = selectedDate + " " + selectedTime;
 
+        // ✅ Save locally in Room
         Booking booking = new Booking(serviceType, fullDateTime, location);
         AppDatabase.getInstance(this).bookingDao().insert(booking);
 
-        // You can also log coordinates if you want to store them later
-        if (selectedLat != 0.0 && selectedLng != 0.0) {
-            System.out.println("Location coordinates: " + selectedLat + ", " + selectedLng);
-        }
+        // ✅ Also save to Firebase Firestore
+        Map<String, Object> bookingMap = new HashMap<>();
+        bookingMap.put("serviceType", serviceType);
+        bookingMap.put("dateTime", fullDateTime);
+        bookingMap.put("location", location);
+        bookingMap.put("latitude", selectedLat);
+        bookingMap.put("longitude", selectedLng);
+        bookingMap.put("timestamp", System.currentTimeMillis());
+
+        firestore.collection("bookings")
+                .add(bookingMap)
+                .addOnSuccessListener(documentReference ->
+                        Toast.makeText(this, "Booking also saved to Firebase!", Toast.LENGTH_SHORT).show()
+                )
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Firebase Error: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
 
         BookingAlertScheduler.scheduleAlert(this, serviceType, selectedDate);
 
@@ -150,7 +166,6 @@ public class AddBookingActivity extends AppCompatActivity {
         finish();
     }
 
-    /** 🔁 Handle location picker result */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
