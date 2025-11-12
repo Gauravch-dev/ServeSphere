@@ -1,6 +1,6 @@
 <resources>
     <!-- Replace with your actual API key -->
     <string name="google_maps_key" translatable="false">
-        AIzaSyCFy5YLddjjGulGqq-LNhgh0xBBD29yAZA
+        AIzaSyAeC_3LSnTXWEJgQ-NAClE-rgkb6cz_D-0
     </string>
 </resources>

@@ -64,6 +64,9 @@ dependencies {
     // ✅ Room (local persistence)
     implementation("androidx.room:room-runtime:2.6.1")
     implementation(libs.activity)
+    implementation(libs.monitor)
+    implementation(libs.ext.junit)
+    testImplementation(libs.junit.junit)
     annotationProcessor("androidx.room:room-compiler:2.6.1")
 
     // ✅ Lifecycle ViewModel + LiveData
